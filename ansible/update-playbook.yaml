@@ -1,0 +1,16 @@
+---
+- name: Install Update
+  hosts: all
+  tasks:
+  - name: Install Update on Ubuntu or Debian
+    apt:
+      name: update
+      state: present
+    when: ansible_os_family == "Debian" or
+          ansible_os_family == "Ubuntu" 
+  - name: Install Update on Redhat
+    yum:
+      name: update
+      state: present
+    when: ansible_os_family == "Redhat" or
+          ansible_os_family == "SUSE"
