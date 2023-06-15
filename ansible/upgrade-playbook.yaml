@@ -1,0 +1,15 @@
+---
+- name: Install Upgate
+  hosts: all
+  tasks:
+  - name: Install Upgateon Ubuntu or Debian
+    apt:
+      name: upgate
+      state: present
+    when: ansible_os_family == "Ubuntu" 
+  - name: Install Upgateon Redhat
+    yum:
+      name: upgate
+      state: present
+    when: ansible_os_family == "Redhat" or
+          ansible_os_family == "SUSE"
