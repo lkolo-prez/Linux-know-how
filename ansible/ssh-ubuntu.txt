@@ -1,0 +1,7 @@
+
+sudo passwd
+sudo echo "Port 50022" >> /etc/ssh/sshd_config
+sudo echo "PermitRootLogin Yes" >> /etc/ssh/sshd_config
+ 
+sudo systemctl restart sshd
+sudo systemctl status sshd
