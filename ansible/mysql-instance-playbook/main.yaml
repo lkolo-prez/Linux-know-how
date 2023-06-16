@@ -1,0 +1,39 @@
+  ---
+- hosts: your_host
+  become: yes
+  vars_files:
+    - vars.yml
+  tasks:
+    - name: Import MySQL APT repository key
+      apt_key:
+        url: https://mysql.com/i/38BCE24D3DF9EF1865A1F1486D4D9F05A3F3E70F.asc
+        state: present
+
+    - name: Add MySQL APT repository
+      apt_repository:
+        repo: deb http://repo.mysql.com/apt/ubuntu/ bionic mysql-8.0
+        state: present
+        update_cache: yes
+
+    - name: Install MySQL Server
+      apt:
+        name: mysql-server
+        state: present
+
+    - name: Start and enable MySQL Service
+      systemd:
+        name: mysql
+        state: started
+        enabled: yes
+
+    - name: Change root user password
+      expect:
+        command: mysql_secure_installation
+        responses:
+          'Enter password for user root:': ''
+          'New password:': "{{ mysql_root_password }}"
+          'Re-enter new password:': "{{ mysql_root_password }}"
+          'Remove anonymous users? (Press y|Y for Yes, any other key for No) :': 'y'
+          'Disallow root login remotely? (Press y|Y for Yes, any other key for No) :': 'y'
+          'Remove test database and access to it? (Press y|Y for Yes, any other key for No) :': 'y'
+          'Reload privilege tables now? (Press y|Y for Yes, any other key for No) :': 'y'
