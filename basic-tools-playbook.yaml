@@ -1,0 +1,23 @@
+---
+- name: Install basic tools on all servers
+  hosts: all
+  become: yes
+  tasks:
+    - name: Install tools on Ubuntu/Debian systems
+      apt:
+        name:
+          - mc
+          - htop
+          - lynx
+        state: present
+      when: ansible_os_family == "Debian"
+
+    - name: Install tools on CentOS/RHEL/AlmaLinux systems
+      yum:
+        name:
+          - mc
+          - htop
+          - lynx
+        state: present
+      when: ansible_os_family == "RedHat"
+...
