@@ -1,0 +1,5 @@
+---
+admin_user: 'admin_user'
+admin_password: 'admin_password'
+domain: 'your_domain'
+dns_servers: 'your_dns_servers'  # list of dns servers separated by comma, e.g., 'dns1.your_domain,dns2.your_domain'

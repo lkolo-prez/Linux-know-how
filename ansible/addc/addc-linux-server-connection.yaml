@@ -1,0 +1,29 @@
+---
+- hosts: all
+  become: yes
+  vars_files:
+    - vars.yml
+  tasks:
+    - name: Install necessary packages
+      yum:
+        name: ['realmd', 'sssd', 'krb5-workstation', 'krb5-libs', 'samba-common-tools', 'oddjob', 'oddjob-mkhomedir', 'openldap-clients', 'policycoreutils-python']
+        state: present
+
+    - name: Discover realm
+      command: realm discover {{ domain }}
+
+    - name: Join to the domain
+      command: echo {{ admin_password }} | realm join --user={{ admin_user }} {{ domain }}
+
+    - name: Enable home directory creation
+      lineinfile:
+        dest: /etc/pam.d/common-session
+        line: "session required pam_mkhomedir.so skel=/etc/skel/ umask=0022"
+        state: present
+
+    - name: Update DNS servers
+      lineinfile:
+        dest: /etc/resolv.conf
+        line: "nameserver {{ item }}"
+        state: present
+      with_items: "{{ dns_servers.split(',') }}"
