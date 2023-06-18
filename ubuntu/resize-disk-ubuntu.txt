@@ -1,0 +1,14 @@
+DISK RESIZE UBUNTU
+
+parted
+print
+resizepart 
+
+df -h
+
+sudo pvresize /dev/sda3
+vgdisplay 
+lvextend -L +2G /thename/of/filesystem
+resize2fs /thename/of/filesystem
+
+df -h

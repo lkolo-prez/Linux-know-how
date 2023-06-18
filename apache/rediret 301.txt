@@ -1,0 +1,27 @@
+CTRL + ALT + H
+
+#redirect www --> non-www
+RewriteCond %{HTTP_HOST} ^www.<web-domain> [NC]
+RewriteRule ^(.*)$ http://<web-domain>/$1 [L,R=301]
+
+
+#redirect non-www --> www
+RewriteCond %{HTTP_HOST} ^<web-domain> [NC]
+RewriteRule ^(.*)$ http://www.<web-domain>/$1 [L,R=301]
+
+
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+RewriteCond %{HTTP_HOST} ^www.(.+)$ [NC]
+RewriteRule ^ https://%1%{REQUEST_URI} [R=301,L]
+</IfModule>
+RewriteCond %{HTTP_HOST} ^6606.eu [NC]
+RewriteRule ^(.*)$ http://www.6606.eu/$1 [L,R=301]
+
+
+RewriteEngine on
+RewriteCond %{HTTP_HOST} ^www\.<web-domain>\.com$ [NC]
+RewriteRule ^(.*)$ http://<web-domain>/$1 [R=301,L]

@@ -1,0 +1,148 @@
+Wydawane polecenia
+ POPRZEDNIA LEKCJA
+Lista produktówMini kurs CURLWydawane polecenia
+Poniżej wypisałem polecenia, jakich używam w kursie wraz z ich opisami.
+
+Shell
+# podstawowe wywołanie CURLa
+curl http://nazwa.serwera.pl
+
+# nadpisanie hostname (domeny)
+curl -H 'Host: inna-domena.pl' http://nazwa.serwera.pl
+
+# nadpisanie nagłówka content-type
+curl -H 'Content-type: application/json' http://nazwa.serwera.pl
+
+# nadpisanie User-Agent
+curl -A 'nie jestem curlem' http://nazwa.serwera.pl
+
+# tryb 'verbose' (szczegóły połączenia)
+curl -v http://nazwa.serwera.pl
+
+# zmiana używanej metody z GET na inną
+curl -X METODA http://nazwa.serwera.pl
+
+# wysyłanie danych metodą POST
+curl -d "zmienna=wartość&zmienna2=wartość2" http://nazwa.serwera.pl
+
+# nadpisanie referera
+curl --referer "fake-domena.pl" http://nazwa.serwera.pl
+
+# doklaracja ciasteczek
+curl --cookie "imie=Stefan" http://nazwa.serwera.pl
+
+# zapisywanie ciastek otrzymanych od serwera do pliku
+curl --cookie-jar plik.txt http://nazwa.serwera.pl
+
+# dodawanie ciastek z pliku do zapytania
+curl --cookie plik.txt http://nazwa.serwera.pl
+
+# pełna obsługa ciastek (jak w przeglądarce, np. do utrzymania sesji)
+curl -b plik.txt --cookie-jar plik.txt http://nazwa.serwera.pl
+
+# wyświetlanie nagłówków zwracanych przez serwer
+curl -I http://nazwa.serwera.pl
+
+# wyświetlanie nagłówków oraz treści zwracanej przez serwer
+curl -i http://nazwa.serwera.pl
+
+# podążanie za przekierowaniami (nagłówki 'location')
+curl -L http://nazwa.serwera.pl
+
+# ograniczenie czasu wykonania zapytania do maksymalnie 3 sekund
+curl -m 3 http://nazwa.serwera.pl
+
+# trzykrotne ponawianie połączenia w przypadku napotkania błedów
+curl --retry 3 http://nazwa.serwera.pl
+
+# zapisywanie efektu zapytania do pliku
+curl -o plik.txt http://nazwa.serwera.pl
+
+# pomijanie wszelkich błedów SSL (np. wygaśnięty certyfikat lub self-signed)
+curl -k https://nazwa.serwera.pl
+
+# logowanie do aplikacji przez basic-auth
+curl -u login:hasło https://nazwa.serwera.pl
+
+# podstawowe wywołanie CURLa
+curl http://nazwa.serwera.pl
+​
+# nadpisanie hostname (domeny)
+curl -H 'Host: inna-domena.pl' http://nazwa.serwera.pl
+​
+# nadpisanie nagłówka content-type
+curl -H 'Content-type: application/json' http://nazwa.serwera.pl
+​
+# nadpisanie User-Agent
+curl -A 'nie jestem curlem' http://nazwa.serwera.pl
+​
+# tryb 'verbose' (szczegóły połączenia)
+curl -v http://nazwa.serwera.pl
+​
+# zmiana używanej metody z GET na inną
+curl -X METODA http://nazwa.serwera.pl
+​
+# wysyłanie danych metodą POST
+curl -d "zmienna=wartość&zmienna2=wartość2" http://nazwa.serwera.pl
+​
+# nadpisanie referera
+curl --referer "fake-domena.pl" http://nazwa.serwera.pl
+​
+# doklaracja ciasteczek
+curl --cookie "imie=Stefan" http://nazwa.serwera.pl
+​
+# zapisywanie ciastek otrzymanych od serwera do pliku
+curl --cookie-jar plik.txt http://nazwa.serwera.pl
+​
+# dodawanie ciastek z pliku do zapytania
+curl --cookie plik.txt http://nazwa.serwera.pl
+​
+# pełna obsługa ciastek (jak w przeglądarce, np. do utrzymania sesji)
+curl -b plik.txt --cookie-jar plik.txt http://nazwa.serwera.pl
+​
+# wyświetlanie nagłówków zwracanych przez serwer
+curl -I http://nazwa.serwera.pl
+​
+# wyświetlanie nagłówków oraz treści zwracanej przez serwer
+curl -i http://nazwa.serwera.pl
+​
+# podążanie za przekierowaniami (nagłówki 'location')
+curl -L http://nazwa.serwera.pl
+​
+# ograniczenie czasu wykonania zapytania do maksymalnie 3 sekund
+curl -m 3 http://nazwa.serwera.pl
+​
+# trzykrotne ponawianie połączenia w przypadku napotkania błedów
+curl --retry 3 http://nazwa.serwera.pl
+​
+# zapisywanie efektu zapytania do pliku
+curl -o plik.txt http://nazwa.serwera.pl
+​
+# pomijanie wszelkich błedów SSL (np. wygaśnięty certyfikat lub self-signed)
+curl -k https://nazwa.serwera.pl
+​
+# logowanie do aplikacji przez basic-auth
+curl -u login:hasło https://nazwa.serwera.pl
+​
+Skrypt używany przeze mnie do debugowania zapytań (komentowałem jego poszczególne części).
+
+PHP
+<?php
+  print_r($_SERVER);
+  print_r($_POST);
+  setcookie('imie','Marian');
+  print_r($_COOKIE);
+  header('Location: https://onet.pl');
+  echo "Wiadomość pierwsza\n";
+  sleep(10);
+  echo "Wiadomość druga\n";
+<?php
+  print_r($_SERVER);
+  print_r($_POST);
+  setcookie('imie','Marian');
+  print_r($_COOKIE);
+  header('Location: https://onet.pl');
+  echo "Wiadomość pierwsza\n";
+  sleep(10);
+  echo "Wiadomość druga\n";
+​

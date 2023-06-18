@@ -1,0 +1,24 @@
+sudo mkdir -p /var/www/<web-domain>/public_html
+sudo chown -R $USER:$USER /var/www/<web-domain>/public_html
+echo "index.html" >> /var/www/<web-domain>/public_html/index.html 
+
+sudo mcedit /etc/apache2/sites-available/<web-domain>.conf
+
+<VirtualHost *:80>
+    ServerAdmin admin@<web-domain>
+    ServerName <web-domain>
+    ServerAlias www.<web-domain>
+    DocumentRoot /var/www/<web-domain>/public_html
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>
+
+sudo a2ensite <web-domain>.conf
+
+sudo mcedit /etc/hosts
+127.0.0.1   localhost
+127.0.1.1   guest-desktop
+123.123.123.123 <web-domain>
+
+sudo systemctl restart apache2
+sudo systemctl status apache2

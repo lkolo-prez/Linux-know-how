@@ -1,0 +1,15 @@
+---
+- host: all
+  become: yes
+  tasks:
+    - name: instalacja mc
+      apt:
+        name: mc
+        state: present
+        update_cache: true
+    - name: instalacja tree
+      apt:
+        name: tree
+        state: present
+        update_cache: true  
+

@@ -1,0 +1,25 @@
+ntp
+yum install ntp ntpdate ntp-doc
+y
+chkconfig ntpd on
+ntpdate pool.ntp.org
+systemctl start ntpd
+systemctl status ntpd
+
+
+htop
+yum -y install epel-release
+yum -y install htop
+
+wget
+sudo yum install wget
+
+ls -l /etc/localtime
+
+nload
+sudo apt install nload	
+
+
+docker
+https://dev.mysql.com/doc/refman/8.0/en/docker-mysql-getting-started.html
+ 

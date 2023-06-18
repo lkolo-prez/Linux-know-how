@@ -1,0 +1,43 @@
+sudo mkdir -p /var/www/<web-domain>/public_html
+
+sudo chown -R $USER:$USER /var/www/<web-domain>/public_html
+
+sudo chmod -R 755 /var/www
+
+echo "index.html" >> /var/www/sqladmins.pl/public_html/index.html
+
+<html>
+  <head>
+    <title>Welcome to <web-domain></title>
+  </head>
+  <body>
+    <h1>Success! The <web-domain> virtual host is working!</h1>
+  </body>
+</html>
+
+sudo cp /etc/apache2/sites-available/000-default.conf /etc/apache2/sites-available/<web-domain>.conf
+
+<VirtualHost *:80>
+    ServerAdmin admin@<web-domain>
+    ServerName <web-domain>
+    ServerAlias www.<web-domain>
+    DocumentRoot /var/www/<web-domain>/public_html
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>
+
+
+sudo a2ensite <web-domain>.conf
+
+sudo a2ensite 000-default.conf
+sudo a2dissite 000-default.conf
+
+sudo systemctl restart apache2
+sudo systemctl status apache2
+
+sudo mcedit /etc/hosts
+
+127.0.0.1   localhost
+127.0.1.1   guest-desktop
+123.234.345.567 <web-domain>
+

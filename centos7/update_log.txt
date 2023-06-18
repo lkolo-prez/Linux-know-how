@@ -1,0 +1,11 @@
+sprawdzanie co ostało update podcza udopate
+
+1. login
+2. hasło
+3. cd /var/log
+4. ls
+5. cat yum.log
+6. zaznacz myszka to co jest potrzebna
+7. kliknij enter
+8. wklej do raportu
+9. exit
